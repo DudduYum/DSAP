@@ -17,15 +17,16 @@ public class Parser{
 
 	}
         private String DelateSpaces(String st){
-            boolean space = false;
-            String res = "";
             /*
             il metodo score una stringa ed elimina da essa tutte le occorenze 
             multiple di ' '
             */
+            boolean space = false;
+            String res = "";
+     
             for(int i = 0; i< st.length();i++){
-                if( ! (st.charAt(i) == ' ' && space))     //aggiungo char alla nuova stringa se quello e' diverso da ' '
-                    res+= st.charAt(i);
+                if( ! (st.charAt(i) == ' ' && space))     //aggiungo il carattere alla stringa solo se non lo spazio oppure è lo spazio 
+                    res+= st.charAt(i);                     // incontrato per prima volta
                 space = (st.charAt(i) == ' ')?   true : false;// decido nuovo valore di space
             }
             return res;
@@ -61,6 +62,7 @@ public class Parser{
 //            }
             return res;
         }
+        
 	public static void main(String[] argv)throws IOException {
 		String inputLine="";
 		InputStreamReader cin = new InputStreamReader(System.in);
@@ -70,11 +72,28 @@ public class Parser{
                 boolean GrafType = true; // fa si che viene stabilito se grafo
                 boolean inComment = false; // aiuta a ignorare i comenti
                 //e' orientato o meno solo una volta
-		while(endInput){
+		
+                while(endInput){
                     char input;
                     while(endLine){
 			input = (char)cin.read();
-			if(input == ';' || input == '{')
+                        /*
+                        gestione commenti 
+                        */
+                        if(inputLine.length() > 0){
+                            if(input == '/' && inputLine.charAt(inputLine.length()-1) == '/')
+                                while( '\n' != (char)cin.read() ){}
+                            
+                            if(input == '#')
+                                while( '\n' != (char)cin.read() ){}
+                            
+                            if(input == '*' && inputLine.charAt(inputLine.length()-1) == '/'){
+                                char theLastOne = 'a',cur='a';//serve per far funzionare il ciclo sotto, se no esce con stringa /*/ ... */
+                                while( (cur = (char)cin.read()) != '/' && theLastOne != '*')
+                                        theLastOne = cur;
+                            }
+                        }
+                        if(input == ';' || input == '}')
                             endLine = false;
                         if(input != '\n' && input != '\t') //'tlgo 'i 'da capo' dalla stringa di input
                             inputLine+= input;
@@ -82,41 +101,27 @@ public class Parser{
                     /*
                     create the GRaf
                     */
-                    
                     /*
-                    gestione commenti 
+                    determino se e' un graffo orientato o no
+                    (solo una volta)
                     */
-                    if(
-                            !(inputLine.substring(0, 2).equals("//") || inputLine.substring(1, 3).equals("//"))){
-                        
-                    }
-                    if(! (inputLine.charAt(0) == '/' && inputLine.charAt(1) == '/')){
-                        
-                        /*
-                        determino se e' un graffo orientato o no
-                        (solo una volta)
-                        */
-                        
-                        if(GrafType){
-                            if(inputLine.charAt(0) == 'd'){
-                                //set type of the graph
-                            }
-//                            faccio split in base a ' '
-                            int i;
-                            for(i = 0 ; i< inputLine.length();i++){
-                                if(inputLine.charAt(i) == ' ')
-                                    break;
-                            }
-                            int j;
-                            for(j = ++i ; j< inputLine.length();j++){
-                                if(inputLine.charAt(j) == ' ')
-                                    break;
-                            }
-                            
-//                            set name of the graph inputLine.subSequence(i, j);
-                            GrafType=false;
+                    if(GrafType){
+                        if(inputLine.charAt(0) == 'd'){
+                            //set type of the graph
                         }
-                        
+//                            faccio split in base a ' '
+                        int i;
+                        for(i = 0 ; i< inputLine.length();i++){
+                            if(inputLine.charAt(i) == ' ')
+                                break;
+                        }
+                        int j;
+                        for(j = ++i ; j< inputLine.length();j++){
+                            if(inputLine.charAt(j) == ' ')
+                                break;
+                        }
+//                            set name of the graph inputLine.subSequence(i, j);
+                        GrafType=false;
                     }  
                 }
 		System.out.print(inputLine);
