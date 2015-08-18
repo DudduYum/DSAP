@@ -8,12 +8,15 @@ package asd_progetto;
 /**
  *
  * @author rostyslavkostyuk
+ * @param <T>
  */
-public class ListCell {
-    private Node node;
-    private ListCell next = null;
+
+public class ListCell<T> {
+    private final T node;
+    private ListCell<T> next = null;
     
-    public ListCell(Node node){
+    
+    public ListCell(T node){
         this.node = node;
     }
     
@@ -21,7 +24,7 @@ public class ListCell {
         this.next = next;
     }
     
-    public Node getNode(){
+    public T getNode(){
         return node;
     }
     

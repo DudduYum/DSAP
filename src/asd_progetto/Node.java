@@ -12,14 +12,13 @@ package asd_progetto;
 public class Node {
     private List In = null;
     private List Out = null;
-    private Node repp = null;
+    private Node repp = null;// da modificare
     private final String label;
     private int key;
     
     public Node(String name){
         label = name;
         //generate the key;
-        
     }
     public void setIn(List in){
         this.In = in;
@@ -36,4 +35,8 @@ public class Node {
     public String getLabel(){
         return label;
     }
+    public void addAdiacentNode(Node n,boolean In,boolean Out,String[] adj){
+        
+    }
+    
 }

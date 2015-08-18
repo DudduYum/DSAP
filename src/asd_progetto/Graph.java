@@ -1,22 +1,23 @@
-package asd_progetto;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package asd_progetto;
 
 /**
  *
  * @author rostyslavkostyuk
  */
-public abstract class ComponentSet {
-//    private List roots;
+public class Graph extends ComponentSet{
+    List<List> roots;
     
-//    O(|V|) costo
-//    public Node getNodeByName(String name){
-//        return roots.getNodeByLabel(name);
-//    }
-    
-    
+    public Graph(){
+        roots = new List<>();
+    }
+    public void addNodes(String[] nodes){
+       
+
+        
+    }
 }
