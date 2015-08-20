@@ -36,7 +36,7 @@ public class Parser{
             }
             return res;
         }
-        public static String[] splitPro(String st, String splitSt){
+        public static String[] split(String st, String splitSt){
             String[] res = null;
             if( st.length() >= splitSt.length() ){
                 
@@ -50,7 +50,6 @@ public class Parser{
                     if(st.substring(i, i + len).equals(splitSt))
                         size++;
                 }
-                res = new String[size];
                 /*
                 riempio la stringa di output con le sotto stringhe di st
                 per fare cio uso 3 puntatori 
@@ -178,21 +177,43 @@ public class Parser{
             return res;
         }
 	public static void main(String[] argv)throws IOException {
+
+            Node n1 = new Node("n1");
+            Node n2 = new Node("n2");
+            Node n3 = new Node("n3");
+
+            Struttura st1 = n1.getRepp();
+            Struttura st2 = n2.getRepp();
+            Struttura st12 = st1.union(st2);
+            Struttura st3 = n3.getRepp();
             
-            Node tmp = new Node("Tmp");
-            TreeSet<Node> set = new TreeSet<>(tmp);
-            List<Node> list = new List<>();
-            List<Node> listone = new List<>();
-            if(set.getClass().equals(list.getClass()))
-                System.out.print("You can't do it man");
-            if(listone.getClass().equals(list.getClass()))
-                System.out.print("Credo che funzioni");
-            Struttura st1 = (Struttura) set;
-            Struttura st2 = (Struttura) list;
-            if(set.getClass().equals(list.getClass()))
-                System.out.print("You can't do it man");
-            if(listone.getClass().equals(list.getClass()))
-                System.out.print("Credo che funzioni");
+            Struttura tmp = st12.find();
+            if(tmp.getClass().equals(List.class))
+                System.out.print("Sembra che funziona");
+            System.out.print(((List<Node>) tmp).length());
+            
+
+//            if(st1.find() == st2.find())
+//                System.out.print("Dai cazzo");
+//            if(st1.find() == st3.find())
+//            System.out.print("Ci siamo");
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////           
+//            Node tmp = new Node("Tmp");
+//            TreeSet<Node> set = new TreeSet<>(tmp);
+//            List<Node> list = new List<>();
+//            List<Node> listone = new List<>();
+//            if(set.getClass().equals(list.getClass()))
+//                System.out.print("You can't do it man");
+//            if(listone.getClass().equals(list.getClass()))
+//                System.out.print("Credo che funzioni");
+//            Struttura st1 = (Struttura) set;
+//            Struttura st2 = (Struttura) list;
+//            if(set.getClass().equals(list.getClass()))
+//                System.out.print("You can't do it man");
+//            if(listone.getClass().equals(list.getClass()))
+//                System.out.print("Credo che funzioni");
+            ////////////////////////////////////////////////////////////////////
 //            String st = "programmer";
 //            System.out.print(st.substring(9, 10));
 //            for(int i=0; i < 10 ;i++){

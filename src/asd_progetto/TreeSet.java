@@ -14,16 +14,38 @@ public class TreeSet<T> implements Struttura<T> {
     private Struttura rapp;
     private T key;
     private Struttura getTheLowestNode(){
+        TreeSet<T> interator = this;
         
-        Struttura interator = rapp;
-        /*
-        finche interator e suo rappresentante sono dello stesso tipo, fai
-        */
-        while(interator.getClass().equals(((TreeSet<T>) rapp).rapp.getClass())){
-            interator = ((TreeSet<T>) rapp).rapp;
+        if(!interator.rapp.getClass().equals(List.class)){
+            interator.rapp = getTheLowestNode();
         }
+                
         return interator;
     }
+//    private Struttura getTheLowestNode(){
+//        Struttura interator = rapp;
+//        //se il rappresentante non e' una lista
+//        if(!interator.getClass().equals(List.class)){
+//            interator = (TreeSet<T>) getTheLowestNode();
+//        }
+//        return interator;
+//    }
+//    private Struttura getTheLowestNode(){
+//        
+//        TreeSet<T> interator = (TreeSet<T>) rapp;
+//        /*
+//        finche interator e suo rappresentante sono dello stesso tipo, fai
+//        */
+//        while(!interator.rapp.getClass().equals(List.class)){
+//            old
+//            interator = (TreeSet<T>) interator.getRapp();
+//        }
+//        
+////        while(interator.getClass().equals(((TreeSet<T>) rapp).rapp.getClass())){
+////            interator = ((TreeSet<T>) rapp).rapp;
+////        }
+//        return interator;
+//    }
     public TreeSet(T node){
         key = node;
         List<Node> tmp = new List<>();
@@ -46,18 +68,23 @@ public class TreeSet<T> implements Struttura<T> {
     public void addNode(T n) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    public Struttura find1(){
+        List<Node> res = (List<Node>) ((TreeSet<Node>) this.getTheLowestNode()).rapp;
+        return res;
+    }
     @Override
     public Struttura find() {//path compration
-        rapp =  ((TreeSet<T>) rapp).getTheLowestNode();
-        rapp = ((TreeSet<T>) rapp).rapp;
-        return rapp;
+        List<Node> res = (List<Node>) ((TreeSet<Node>) this.getTheLowestNode()).rapp;
+        return res;
+//        rapp =  ((TreeSet<T>) rapp).getTheLowestNode();
+//        rapp = ((TreeSet<T>) rapp).rapp;
+//        return rapp;
     }
 
     @Override
     public Struttura union(Struttura rapp) {
         
-        TreeSet<T> rapp1 = (TreeSet<T>) ((TreeSet<T>) this.rapp).getTheLowestNode();
+        TreeSet<T> rapp1 = (TreeSet<T>)  this.getTheLowestNode();
         TreeSet<T> rapp2 = (TreeSet<T>) ((TreeSet<T>) rapp).getTheLowestNode();
         Struttura res = null;
         if(rapp1 != rapp2){

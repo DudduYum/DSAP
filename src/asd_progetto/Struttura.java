@@ -11,6 +11,7 @@ package asd_progetto;
  * @param <T>
  */
 public interface Struttura<T> {
+//    public Struttura rapp = null;
     public T getNodeByLabel(String st);
     public void addNode(T n);
     public Struttura find();

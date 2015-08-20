@@ -90,6 +90,7 @@ public class List<T> implements Struttura<T> {
         this.last.setNext(list.first);
         this.last = list.last;
         res = this;
+        res.length = this.length + list.length;
         return res;
     }
 }

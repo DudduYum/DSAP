@@ -12,12 +12,14 @@ package asd_progetto;
 public class Node {
     private List In = null;
     private List Out = null;
-    private Node repp = null;// da modificare
+    private Struttura repp = null;// da modificare
     private final String label;
     private int key;
     
     public Node(String name){
         label = name;
+        TreeSet<Node> tmp = new TreeSet<>(this);
+        repp = (Struttura) tmp;
         //generate the key;
     }
     public void setIn(List in){
@@ -26,10 +28,10 @@ public class Node {
     public void setOut(List Out){
         this.Out = Out;
     }
-    public void setRepp(Node node){
+    public void setRepp(Struttura node){
         this.repp = node;
     }
-    public Node getRepp(){
+    public Struttura getRepp(){
         return repp;
     }
     public String getLabel(){
