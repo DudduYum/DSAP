@@ -5,6 +5,8 @@
  */
 package asd_progetto;
 
+import asd_progetto.List.Interator;
+
 /**
  *
  * @author rostyslavkostyuk
@@ -15,26 +17,78 @@ public class Graph extends ComponentSet{
     public Graph(){
         roots = new List<>();
     }
-    public void addNodes(String[] nodes){
-       
-
-        
+    public void addList(List<Node> subGraph){
+        roots.addNode(subGraph);
     }
-    public static void main(String[] argv){
-        Node n1 = new Node("n1");
-        Node n2 = new Node("n2");
-        Node n3 = new Node("n3");
-        
-        Struttura st1 = n1.getRepp();
-        Struttura st2 = n2.getRepp();
-        Struttura st12 = st1.union(st2);
-        Struttura st3 = n3.getRepp();
-        System.out.print("Test");
-        
-        if(st1.find() == st2.find())
-            System.out.print("Dai cazzo");
-        if(st1.find() == st3.find())
-            System.out.print("Ci siamo");
-        
+    public biReturnValue getNodeAndListByName(String name){
+//        Interator it = roots.getInterator();
+//            boolean test = true;
+//            int cou = 0;
+//            while(it.HasNext() && test){
+//                
+//                List<Node> tmp = (List<Node>) it.get();
+//                Interator tmpIt = tmp.getInterator();
+//                do{
+//                    Node n = (Node) tmpIt.get();
+//                    if( n.getLabel().equals("b") ){
+//                        test = false;
+//                    }
+//                }while(tmpIt.HasNext() && test);
+//                if(!test){
+////                    System.out.print(++cou);
+//                    it.remove();
+//                }
+//                
+//            }
+        Interator it = roots.getInterator();
+        biReturnValue<Node,List> res = null;
+//        boolean Notfound = true;
+        boolean test = true;//forse non serve...
+        do{
+            List<Node> nodeList = (List<Node>) it.get();
+            Interator nodeListIt = nodeList.getInterator();
+            do{
+                /*
+                Cerco il nodo e la liste che lo contiene, 
+                quando li trovo elimino entrambi dalle loro
+                liste e gli salvo in res
+                */
+                Node n = (Node) nodeListIt.get();
+                if( n.getLabel().equals("b") ){
+                    res = new biReturnValue(n,nodeList);
+                    nodeListIt.remove();
+                    it.remove();
+                }
+            }while(nodeListIt.HasNext() && res == null);
+            /*
+            devo eliminare non e la lista per poter grarantire 
+            che non ci sono le liste duplicate o sotto liste
+            nel roots
+            */
+        }while(it.HasNext() && res == null);
+        return res;
+    }
+    // non sono sicuro che serve
+//    public void addNodes(String stNodes){
+//        String[] n = Parser.split(stNodes, " -- ");
+//        Node[] nodes = new Node[n.length];
+//        for(int i = 0; i < nodes.length ; i++){
+//            
+//        }
+//        
+//    }
+    public class biReturnValue<N,L>{
+        private N nodo;
+        private L lista;
+        public biReturnValue(N nodo, L lista){
+            this.nodo = nodo;
+            this.lista = lista;
+        }
+        public N getNode(){
+            return nodo;
+        }
+        public L getLista(){
+            return lista;
+        }
     }
 }

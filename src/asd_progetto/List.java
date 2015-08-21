@@ -13,13 +13,16 @@ package asd_progetto;
  */
 public class List<T> implements Struttura<T> {
     private int length = 0;
-    private ListCell first = null;
-    private ListCell last = null;
+    private ListCell<T> first = null;
+    private ListCell<T> last = null;
 //    private ListCell last = null;
- 
+
+    public Interator getInterator(){
+        return new Interator();
+    }
     @Override
     public void addNode(T n){
-        ListCell lc = new ListCell(n);
+        ListCell<T> lc = new ListCell(n);
         lc.setNext(first);
         first = lc;
         last = (last == null)? lc : last;
@@ -51,7 +54,7 @@ public class List<T> implements Struttura<T> {
 //        }
 //        //soluzione a null pointer
 //        return (interator == null)? null : interator.getNode();
-    }
+    }//forse non serve
      @Override
     public Struttura find() {
         return this;
@@ -78,11 +81,6 @@ public class List<T> implements Struttura<T> {
         return length;
     }
 
-//    @Override
-//    public void addNode(Object n) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     @Override
     public Struttura union(Struttura rapp) {
         List<T> res;
@@ -92,5 +90,42 @@ public class List<T> implements Struttura<T> {
         res = this;
         res.length = this.length + list.length;
         return res;
+    }
+    public class Interator{
+        private ListCell<T> cur = first;
+        private ListCell<T> predcessor = null;
+        
+        public void Next(){
+            if(cur != null){
+                predcessor = cur;
+                cur = cur.getNext();
+            }
+        }
+        public void remove(){
+            if(first == last){//quando non ci sono elementi, oppure c'e' uno solo...
+                predcessor = cur = first = last = null; // tutto a null
+            }else{//altrimenti
+                if(cur == last){
+                    predcessor.setNext(null);
+                    last = predcessor;
+                    cur = predcessor.getNext();
+                }else if(cur == first){
+                    first = first.getNext();
+                    cur.setNext(null);
+                    cur = first;
+                }else if(cur != null){
+                    predcessor.setNext(cur.getNext());
+                    cur = predcessor.getNext();
+                } 
+            }
+            if(length > 0)
+                length--;
+        }
+        public T get(){
+            return cur.getNode();
+        }
+        public boolean HasNext(){
+            return cur.getNext() != null;
+        }
     }
 }

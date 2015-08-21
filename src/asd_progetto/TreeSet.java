@@ -16,12 +16,23 @@ public class TreeSet<T> implements Struttura<T> {
     private Struttura getTheLowestNode(){
         TreeSet<T> interator = this;
         
-        if(!interator.rapp.getClass().equals(List.class)){
-            interator.rapp = getTheLowestNode();
+        if(!rapp.getClass().equals(List.class)){
+            interator = (TreeSet<T>) rapp;
+            rapp = interator.getTheLowestNode();
         }
                 
         return interator;
     }
+//    private Struttura getTheLowestNode(){
+//        TreeSet<T> interator = this;
+//        
+//        if(!interator.rapp.getClass().equals(List.class)){
+//            
+//            interator.rapp = getTheLowestNode();
+//        }
+//                
+//        return interator;
+//    }
 //    private Struttura getTheLowestNode(){
 //        Struttura interator = rapp;
 //        //se il rappresentante non e' una lista
@@ -68,14 +79,18 @@ public class TreeSet<T> implements Struttura<T> {
     public void addNode(T n) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public Struttura find1(){
-        List<Node> res = (List<Node>) ((TreeSet<Node>) this.getTheLowestNode()).rapp;
-        return res;
-    }
+//    public Struttura find1(){
+//        List<Node> res = (List<Node>) ((TreeSet<Node>) this.getTheLowestNode()).rapp;
+//        return res;
+//    }
     @Override
     public Struttura find() {//path compration
-        List<Node> res = (List<Node>) ((TreeSet<Node>) this.getTheLowestNode()).rapp;
-        return res;
+//        if( ((TreeSet<Node>) getTheLowestNode()).getClass().equals(TreeSet.class)  ){
+//            System.out.print("Get node funziona");
+//        }
+//        ((TreeSet<Node>) this.getTheLowestNode()).rapp;
+//        List<Node> res = (List<Node>) ((TreeSet<Node>) this.getTheLowestNode()).rapp;
+        return  ((TreeSet<Node>) this.getTheLowestNode()).rapp;
 //        rapp =  ((TreeSet<T>) rapp).getTheLowestNode();
 //        rapp = ((TreeSet<T>) rapp).rapp;
 //        return rapp;

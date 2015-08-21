@@ -5,6 +5,7 @@
  */
 package asd_progetto;
 
+import asd_progetto.List.Interator;//da cancelare
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -176,23 +177,54 @@ public class Parser{
             System.out.print(inputLine);
             return res;
         }
+        public static void test(Node n, List l){
+            n = new Node("test");
+            l = new List<>();
+        }
 	public static void main(String[] argv)throws IOException {
-
-            Node n1 = new Node("n1");
-            Node n2 = new Node("n2");
-            Node n3 = new Node("n3");
-
-            Struttura st1 = n1.getRepp();
-            Struttura st2 = n2.getRepp();
-            Struttura st12 = st1.union(st2);
-            Struttura st3 = n3.getRepp();
+              
+            Graph gp;
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+//            Node n1 = new Node("n1");
+//            Node n2 = new Node("n2");
+//            Node n3 = new Node("n3");
+//
+//            Struttura st1 = n1.getRepp();
+//            Struttura st2 = n2.getRepp();
+//            Struttura st3 = n3.getRepp();
+//            st2.find();
+//            Struttura st12 = st1.union(st2);
+//            ;
+//            st1.find();
+//            if(st2.find() == st1.find()){
+//                System.out.print("L'ho fatta");
+//            }
+//            if(st2.find() != st1.find()){
+//                System.out.print("No, sbagliato");
+//            }
+//            if(st1.find() == st3.find()){
+//                System.out.print("O forse");
+//            }
+//            
+//            Struttura st44 = st3.union(st3);
             
-            Struttura tmp = st12.find();
-            if(tmp.getClass().equals(List.class))
-                System.out.print("Sembra che funziona");
-            System.out.print(((List<Node>) tmp).length());
+//            Struttura st4 = st1.find();
+//            Struttura st5 = st2.find();
+            
+            
+            
+//            Struttura tmp = st12.find();
+//            Struttura tmp1 = st3.find();
+////            Struttura tmp2 = st2.find();
+//            if(tmp.getClass().equals(List.class))
+//                System.out.print("Sembra che funziona");
+//            System.out.print(((List<Node>) tmp).length());
+            
             
 
+            
 //            if(st1.find() == st2.find())
 //                System.out.print("Dai cazzo");
 //            if(st1.find() == st3.find())
@@ -297,4 +329,5 @@ public class Parser{
 //                }
 //		System.out.print(inputLine);
 	}
+        
 }
